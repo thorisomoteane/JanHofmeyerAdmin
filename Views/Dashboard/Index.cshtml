@@ -1,0 +1,81 @@
+﻿@model JanHofmeyerAdmin.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "_AdminLayout";
+}
+
+<h2>Dashboard</h2>
+
+<div class="row mt-4">
+    <div class="col-md-3 mb-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5><i class="fas fa-project-diagram"></i> Projects</h5>
+                <h2>@Model.TotalProjects</h2>
+                <a href="/Projects" class="text-white">Manage →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5><i class="fas fa-calendar"></i> Active Events</h5>
+                <h2>@Model.ActiveEvents</h2>
+                <a href="/Events" class="text-white">Manage →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <h5><i class="fas fa-star"></i> Pending Reviews</h5>
+                <h2>@Model.PendingReviews</h2>
+                <a href="/Reviews" class="text-white">Review →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5><i class="fas fa-envelope"></i> New Messages</h5>
+                <h2>@Model.NewMessages</h2>
+                <a href="/Messages/Contact" class="text-white">View →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 mb-3">
+        <div class="card bg-secondary text-white">
+            <div class="card-body">
+                <h5><i class="fas fa-users"></i> Pending Volunteers</h5>
+                <h2>@Model.PendingVolunteers</h2>
+                <a href="/Messages/Volunteers" class="text-white">Review →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+                <h5><i class="fas fa-images"></i> Gallery Items</h5>
+                <h2>@Model.TotalGalleryItems</h2>
+                <a href="/Gallery" class="text-white">Manage →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h5><i class="fas fa-user-plus"></i> Recent Registrations</h5>
+                <h2>@Model.RecentRegistrations</h2>
+                <small>Last 7 days</small>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@model List<JanHofmeyerAdmin.Models.ContactMessage>
+@{
+    ViewData["Title"] = "Contact Messages";
+    Layout = "_AdminLayout";
+}
+
+<h2>Contact Messages</h2>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var message in Model)
+                {
+                    <tr class="@(!message.IsRead ? "table-info" : "")">
+                        <td>@message.MessageDate.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@message.FullName</td>
+                        <td><a href="mailto:@message.Email">@message.Email</a></td>
+                        <td>@message.Phone</td>
+                        <td>@message.Subject</td>
+                        <td>
+                            <button class="btn btn-sm btn-link" data-bs-toggle="modal" data-bs-target="#messageModal@(message.Id)">
+                                View Message
+                            </button>
+                        </td>
+                        <td>
+                            @if (message.IsRead)
+                            {
+                                <span class="badge bg-secondary">Read</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-primary">New</span>
+                            }
+                        </td>
+                        <td>
+                            @if (!message.IsRead)
+                            {
+                                <form method="post" action="/Messages/MarkAsRead/@message.Id" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-success" title="Mark as Read">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@foreach (var message in Model)
+{
+    <div class="modal fade" id="messageModal@(message.Id)" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Message from @message.FullName</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Date:</strong> @message.MessageDate.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Email:</strong> @message.Email</p>
+                    <p><strong>Phone:</strong> @message.Phone</p>
+                    <p><strong>Subject:</strong> @message.Subject</p>
+                    <hr>
+                    <p>@message.Message</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="mailto:@message.Email" class="btn btn-primary">Reply via Email</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

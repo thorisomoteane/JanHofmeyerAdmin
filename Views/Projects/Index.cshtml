@@ -1,0 +1,57 @@
+﻿@model List<JanHofmeyerAdmin.Models.Project>
+@{
+    ViewData["Title"] = "Projects";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Projects Management</h2>
+    <a href="/Projects/Create" class="btn btn-success">
+        <i class="fas fa-plus"></i> Create New Project
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Theme</th>
+                    <th>People Impacted</th>
+                    <th>Created Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in Model)
+                {
+                    <tr>
+                        <td>@project.Title</td>
+                        <td>
+                            <span class="badge bg-@(project.Status == "Active" ? "success" : "warning")">
+                                @project.Status
+                            </span>
+                        </td>
+                        <td>@project.Theme</td>
+                        <td>@project.PeopleImpacted</td>
+                        <td>@project.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <a href="/Projects/Edit/@project.Id" class="btn btn-sm btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form method="post" action="/Projects/Delete/@project.Id" class="d-inline"
+                                  onsubmit="return confirm('Are you sure you want to delete this project?');">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

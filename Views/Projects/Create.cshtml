@@ -1,0 +1,82 @@
+﻿@model JanHofmeyerAdmin.Models.Project
+@{
+    ViewData["Title"] = "Create Project";
+    Layout = "_AdminLayout";
+}
+
+<h2>Create New Project</h2>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Title *</label>
+                        <input asp-for="Title" class="form-control" required />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Status *</label>
+                        <select asp-for="Status" class="form-select" required>
+                            <option value="">Select Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Planning">Planning</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Theme *</label>
+                        <select asp-for="Theme" class="form-select" required>
+                            <option value="">Select Theme</option>
+                            <option value="Education">Education</option>
+                            <option value="Food Security">Food Security</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Community Development">Community Development</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Short Summary</label>
+                <textarea asp-for="ShortSummary" class="form-control" rows="2"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">About Section</label>
+                <textarea asp-for="AboutSection" class="form-control" rows="4"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Key Goals (separate with |)</label>
+                <textarea asp-for="KeyGoals" class="form-control" rows="3"
+                          placeholder="Goal 1|Goal 2|Goal 3"></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">People Impacted</label>
+                        <input asp-for="PeopleImpacted" type="number" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Project Image</label>
+                        <input type="file" name="imageFile" class="form-control" accept="image/*" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-save"></i> Create Project
+                </button>
+                <a href="/Projects" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

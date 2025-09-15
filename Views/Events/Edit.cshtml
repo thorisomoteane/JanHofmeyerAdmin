@@ -1,0 +1,112 @@
+﻿@model JanHofmeyerAdmin.Models.Event
+@{
+    ViewData["Title"] = "Edit Event";
+    Layout = "_AdminLayout";
+}
+
+<h2>Edit Event</h2>
+
+<div class="card mt-4">
+    <div class="card-body">
+        <form method="post">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CreatedDate" />
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        <label class="form-label">Title *</label>
+                        <input asp-for="Title" class="form-control" required />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label class="form-label">Event Status</label>
+                        <select asp-for="IsUpcoming" class="form-select">
+                            <option value="true">Upcoming</option>
+                            <option value="false">Past Event</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Short Summary</label>
+                <textarea asp-for="ShortSummary" class="form-control" rows="2"></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Event Date *</label>
+                        <input asp-for="EventDate" type="date" class="form-control" required />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Event Time</label>
+                        <input asp-for="EventTime" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Category *</label>
+                        <select asp-for="Category" class="form-select" required>
+                            <option value="Registration Open">Registration Open</option>
+                            <option value="Coming Soon">Coming Soon</option>
+                            <option value="Invite Only">Invite Only</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Tag *</label>
+                        <select asp-for="Tag" class="form-select" required>
+                            <option value="Health">Health</option>
+                            <option value="Education">Education</option>
+                            <option value="Environment">Environment</option>
+                            <option value="Social">Social</option>
+                            <option value="Appreciation">Appreciation</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Location</label>
+                        <input asp-for="Location" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Expected Attendees</label>
+                        <input asp-for="ExpectedAttendees" type="number" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Actual Attendees</label>
+                        <input asp-for="ActualAttendees" type="number" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            @if (!Model.IsUpcoming)
+            {
+                <div class="mb-3">
+                    <label class="form-label">Goals Achieved (for past events)</label>
+                    <textarea asp-for="GoalsAchieved" class="form-control" rows="3"></textarea>
+                </div>
+            }
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Update Event
+                </button>
+                <a href="/Events" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -66,4 +66,3 @@ jobs:
           # When you need the analysis to take place in a directory other than the one from which it was launched, default is .
           projectBaseDir: .
 
-          #token 170bc21bd6e83e8bed52ac3eaa3a8ebcbdbcdf79
